@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Midterm Showcase</title>
+    <style>
+      :root {
+        --ink: #1a1c1f;
+        --muted: #4a4f57;
+        --mist: #f3f1ea;
+        --glow: #f2d89a;
+        --sunset: #f18f6d;
+        --lagoon: #4a7e8a;
+        --deep: #1f2e38;
+        --card: rgba(255, 255, 255, 0.82);
+        --shadow: 0 22px 40px rgba(18, 24, 28, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 15% 20%, rgba(242, 216, 154, 0.35), transparent 55%),
+          radial-gradient(circle at 85% 10%, rgba(241, 143, 109, 0.35), transparent 50%),
+          linear-gradient(135deg, #f7f1e4 0%, #f0e9de 45%, #e6f1f3 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(120deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.08) 40%, transparent 40%, transparent 100%),
+          repeating-linear-gradient(90deg, rgba(31, 46, 56, 0.04) 0, rgba(31, 46, 56, 0.04) 1px, transparent 1px, transparent 14px);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        background: rgba(247, 241, 228, 0.82);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(31, 46, 56, 0.08);
+      }
+
+      .nav {
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 0.85rem;
+        color: var(--deep);
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: var(--deep);
+        font-size: 0.95rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-left: 14px;
+      }
+
+      .hero {
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 70px 24px 40px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        gap: 36px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.6rem, 3vw + 1.8rem, 4.2rem);
+        margin: 0 0 16px;
+        line-height: 1.05;
+        color: var(--deep);
+      }
+
+      .hero .shot {
+        max-width: 260px;
+        margin-left: auto;
+      }
+
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 16px;
+        background: var(--deep);
+        color: var(--mist);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        border-radius: 999px;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+      }
+
+      section {
+        display: flex;
+        align-items: center;
+        padding: 90px 0;
+      }
+
+      .section-shell {
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 2vw + 1.4rem, 3.2rem);
+        margin: 0 0 12px;
+        color: var(--deep);
+      }
+
+      .section-text {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      .details {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .chip {
+        background: rgba(31, 46, 56, 0.08);
+        color: var(--deep);
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .compare {
+        position: relative;
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        min-height: 360px;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        padding-bottom: 52px;
+      }
+
+      .compare-mask {
+        position: absolute;
+        inset: 0 0 52px 0;
+        border-radius: 24px;
+        overflow: hidden;
+        background: var(--card);
+      }
+
+      .compare-mask img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .compare-after {
+        clip-path: inset(0 0 0 20%);
+      }
+
+      .compare-line {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 20%;
+        width: 3px;
+        background: linear-gradient(180deg, transparent, var(--sunset), var(--glow), transparent);
+        box-shadow: 0 0 12px rgba(241, 143, 109, 0.45);
+        pointer-events: none;
+      }
+
+      .compare-handle {
+        position: absolute;
+        left: 20%;
+        bottom: 12px;
+        transform: translateX(-50%);
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--deep);
+        border: 3px solid var(--mist);
+        display: grid;
+        place-items: center;
+        color: var(--mist);
+        font-size: 0.55rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        pointer-events: none;
+      }
+
+      .compare-mask input[type="range"] {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        cursor: col-resize;
+        opacity: 0;
+      }
+
+      .compare-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 12px;
+        text-align: center;
+        font-size: 0.8rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--deep);
+        background: rgba(255, 255, 255, 0.92);
+        padding: 8px 10px;
+        margin: 0 18px;
+        border-radius: 999px;
+      }
+
+      .shot-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 12px;
+        text-align: center;
+        font-size: 0.8rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--deep);
+        background: rgba(255, 255, 255, 0.92);
+        padding: 8px 10px;
+        margin: 0 18px;
+        border-radius: 999px;
+      }
+
+      .gallery.wide {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .shot {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        background: var(--card);
+        box-shadow: var(--shadow);
+        transform: translateY(22px);
+        opacity: 0;
+        transition: transform 0.7s ease, opacity 0.7s ease;
+      }
+
+      .shot img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: transform 0.8s ease, opacity 0.8s ease;
+      }
+
+      .reveal.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .shot.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .accent {
+        height: 4px;
+        width: 54px;
+        background: linear-gradient(90deg, var(--sunset), var(--glow));
+        border-radius: 99px;
+        margin-bottom: 12px;
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery.wide {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 600px) {
+        .nav {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .gallery,
+        .gallery.wide {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <div class="brand">Midterm Portfolio</div>
+        <nav>
+          <a href="#watermark">Watermark Extension</a>
+          <a href="#pixel">Pixel Game</a>
+          <a href="#festive">Festive Site</a>
+          <a href="#math24">Math 24</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="reveal">
+        <h1>Scroll through the workbench.</h1>
+        <p>Projects I worked on during Winter Term.</p>
+      </div>
+      <div class="reveal">
+        <div class="shot">
+          <img src="Screenshots/title.png" alt="Title graphic" />
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section id="watermark">
+        <div class="section-shell">
+          <div class="reveal">
+            <div class="accent"></div>
+            <h2 class="section-title">Watermark Extension</h2>
+            <p class="section-text">
+              A Manifest V3 Chrome Extension that adds a customizable watermark on every video element in a page.
+              The popup menu gives several customizable options, and include features like HDR filter and video downloader.
+            </p>
+            <div class="details">
+              <span class="chip">Chrome Extension</span>
+              <span class="chip">Useful Tool</span>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="compare shot" data-compare>
+              <div class="compare-mask">
+                <img src="Screenshots/Watermark%20Extension/After.png" alt="After watermark" />
+                <img class="compare-after" src="Screenshots/Watermark%20Extension/Before.png" alt="Before watermark" />
+                <div class="compare-line"></div>
+                <div class="compare-handle">Drag</div>
+                <input type="range" min="0" max="100" value="20" aria-label="Reveal watermark effect" />
+              </div>
+              <p class="compare-caption">Before and After HDR Filter</p>
+            </div>
+            <div class="shot">
+              <img src="Screenshots/Watermark%20Extension/1.png" alt="Watermark extension main screen" />
+              <p class="shot-caption">Customizable Watermark, Supports Text and Image</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pixel">
+        <div class="section-shell">
+          <div class="reveal">
+            <div class="accent"></div>
+            <h2 class="section-title">Pixel Game</h2>
+            <p class="section-text">
+              A pixel style roguelike game with millions of loadout choices and several game modes with randomized levels.
+              Added new visual effects and content with brand new mechanics. Solved several issues and made game more
+              flexible for future development.
+            </p>
+            <div class="details">
+              <span class="chip">Game</span>
+              <span class="chip">Pixel</span>
+              <span class="chip">Numerous Content</span>
+              <span class="chip">Complex Mechanisms</span>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot">
+              <img src="Screenshots/Game/1.png" alt="Pixel game main screen" />
+              <p class="shot-caption">Added New Flame Particle Effect and a Brand New Game Mode</p>
+            </div>
+            <div class="shot">
+              <img src="Screenshots/Game/2.png" alt="Pixel game score screen" />
+              <p class="shot-caption">New Weapons, Abilities with New Mechanics. Unified Damage, Hitbox, Angle, and Visual Across the Game</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="festive">
+        <div class="section-shell">
+          <div class="reveal">
+            <div class="accent"></div>
+            <h2 class="section-title">Festive Site</h2>
+            <p class="section-text">
+              A festive page with fabulous visuals and holiday spirit. Includes multiple interactions. Complete with
+              humourous visuals and audio, paired with a adjustable snow effect.
+            </p>
+            <div class="details">
+              <span class="chip">Festive</span>
+              <span class="chip">Holidays</span>
+              <span class="chip">Seasonal</span>
+              <span class="chip">Best Time of the Year</span>
+              <span class="chip">Interactions</span>
+              <span class="chip">Visual and Audio</span>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot">
+              <img src="Screenshots/Festive%20site/1.png" alt="Festive site hero" />
+              <p class="shot-caption">Glamourous Visuals with Intricate Interactions</p>
+            </div>
+            <div class="shot">
+              <img src="Screenshots/Festive%20site/2.png" alt="Festive site details" />
+              <p class="shot-caption">Fun Tools like Snow Bomb Blows Away Real-Time Snow Buildup</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="math24">
+        <div class="section-shell">
+          <div class="reveal">
+            <div class="accent"></div>
+            <h2 class="section-title">Math 24</h2>
+            <p class="section-text">
+              A fun and classic math game reimagined on browser. Player can drag card tiles with numeric expressions to
+              make the calculation equate 24. Includes an automatic solver for challenging questions.
+            </p>
+            <div class="details">
+              <span class="chip">Math Game</span>
+              <span class="chip">Drag and Drop</span>
+            </div>
+          </div>
+          <div class="gallery">
+            <div class="shot">
+              <img src="Screenshots/Math%2024/1.png" alt="Math 24 puzzle screen" />
+              <p class="shot-caption">Clean and Simple Interface and User Interaction</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      document.querySelectorAll(".reveal, .shot").forEach((el, index) => {
+        el.style.transitionDelay = `${index * 0.06}s`;
+        observer.observe(el);
+      });
+
+      document.querySelectorAll("[data-compare]").forEach((compare) => {
+        const slider = compare.querySelector('input[type="range"]');
+        const afterImg = compare.querySelector(".compare-after");
+        const line = compare.querySelector(".compare-line");
+        const handle = compare.querySelector(".compare-handle");
+
+        const update = (value) => {
+          const percent = Number(value);
+          afterImg.style.clipPath = `inset(0 0 0 ${percent}%)`;
+          line.style.left = `${percent}%`;
+          handle.style.left = `${percent}%`;
+        };
+
+        update(slider.value);
+        slider.addEventListener("input", (event) => update(event.target.value));
+      });
+    </script>
+  </body>
+</html>
